@@ -1,0 +1,72 @@
+# Ueberblick
+
+Definitionen:
+	Wallspace:
+		Wallspace definiert einen Koordinatensystem dessen Ursprung am Punkte unten links der Schreibflaeche liegt.
+		Die X-Achse laeuft entlang der unteren Kante der Schreibflaeche.
+		Die Y-Achse laeuft entland der linken Kante der Schreibflaeche.
+		Die Z-Achse steht senkrecht auf der Schreibflaeche.
+	KinectSpace:
+		Ist ein Koordinatensystem, bei dem die Kinect den Ursprung definiert.
+		Ein Punkt der von der Kinect gemessen wird, befindet sich in KinectSpace.
+	Kalibierungspunkte:
+		Die Punkte (0, 0), (BREITE, 0), (0, HOEHE) und (BREITE, HOEHE) in Wallspace.
+
+Darstellung:
+
+    +----------------------------------------------------------------------+
+    |                           MainSystem                                 |
+    +----------------------------------------------------------------------+
+	|		       |                    |                   |
+	v		       v                    v                   v
+  +------------+      +-----------------+    +-------------+     +--------------+
+  | Kalibierer |      | SpaceTranslater |    | PointBuffer |     | RenderSystem |
+  +------------+      +-----------------+    +-------------+     +--------------+
+             |           |
+             v           v
+          +----------------+
+          | 3DTracker      |
+          +----------------+
+
+MainSystem:
+	- Implementiert den Ablauf (z.B. wann kalibiert wird) und steuert die Unterelemente.
+	- Kann sich in unterschiedlichen Phasen befinden.
+		- Kalibierungsphase:
+			In dieser Phase versucht der Kalibierer die Wallspace Koordinaten  als KinectSpace-Koordinaten zu ermitteln.
+			Es werden keine Bewegungen der Hand/des Stiftes in Wallspace übersetzt und der PointBuffer wird nicht gefüllt.
+		- Aufzeichnungsphase:
+			Der Space-Translator muss kalibiert worden sein.
+		- GUI-Phase:
+			Eingaben über die Kinect werden nicht aufgezeichnet, sondern an das GUI-System weitergeleitet.
+			TODO
+	- Enthaelt den main-loop. Der main-loop fuehrt in einer bestimmten Frequenz die tick() Funktion aus.
+	- Ablauf von tick(), wenn in der Aufzeichnungsphase:
+		- Holen der KinectSpace-Koordinaten
+		- Umwandeln der KinectSpace-Koordinaten in Wallspace-Koordinaten
+		- Speichern der WallSpace-Koordinaten im PointBuffer
+		- Gesamten PointBuffer ueber das RenderSystem rendern
+
+Kalibrierer:
+	Aufgabe:
+		Soll die WallSpace-Koordinaten (0, 0), (BREITE, 0), (0, HOEHE) und (BREITE, HOEHE) als KinectSpace-Koordinaten ermitteln.
+	Vorraussetzungen:
+		- Ein 3DTracker, der Kinect-Koordinaten liefert.
+		- Die Information, welcher der getrackten Punkte sich für die Kalibierung eignet.
+		  Da vielleicht jmd im Hintergrund steht und auch dessen Hand getrackt wird, bzw. die falsche Hand der Person.
+		  Dies wird wahrscheinlich nur ueber User-Interaction moeglich sein.
+
+SpaceTranslater:
+	Aufgabe:
+		Uebersetzt KinectSpace-Koordinaten in WallSpace-Koordinaten.
+	Vorraussetungen:
+		- Kalibierungspunkte muessen bekannt sein.
+
+PointBuffer:
+	Aufgabe:
+		Speichert die WallSpace-Koordinaten.
+
+RenderSystem:
+	Aufgabe:
+		Rendert Wallspace-Koordinaten auf den Screen.
+		Rendert GUI auf den Screen.
+		TODO

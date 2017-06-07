@@ -1,0 +1,6 @@
+C:\Users\Lollypopp\Source\Repos\KiBoard\KiBoard\bin\Debug\KiBoard.exe.config
+C:\Users\Lollypopp\Source\Repos\KiBoard\KiBoard\bin\Debug\KiBoard.exe
+C:\Users\Lollypopp\Source\Repos\KiBoard\KiBoard\bin\Debug\KiBoard.pdb
+C:\Users\Lollypopp\Source\Repos\KiBoard\KiBoard\obj\Debug\KiBoard.csprojResolveAssemblyReference.cache
+C:\Users\Lollypopp\Source\Repos\KiBoard\KiBoard\obj\Debug\KiBoard.exe
+C:\Users\Lollypopp\Source\Repos\KiBoard\KiBoard\obj\Debug\KiBoard.pdb

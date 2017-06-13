@@ -43,6 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src/Program.cs" />
+    <Compile Include="src/calibration/Calibrator.cs" />
+    <Compile Include="src/data/CalibrationPoint.cs" />
+    <Compile Include="src/data/Vec3D.cs" />
+    <Compile Include="src/spaceTranslation/SpaceTranslator.cs" />
+    <Compile Include="src/pointBuffer/PointBuffer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
